@@ -89,9 +89,9 @@ class CustomAccountManager(BaseUserManager):
 class User(AbstractBaseUser, Base, PermissionsMixin):
     """User model."""
 
-    name = models.CharField(db_column="Name", default="", max_length=255)
-    address = models.CharField(db_column="Address", default="", max_length=255)
-    phone = models.CharField(db_column="Phone", default="", max_length=255)
+    first_name = models.CharField(db_column="Name", default="", max_length=255)
+    last_name = models.CharField(db_column="Address", default="", max_length=255)
+    username = models.CharField(db_column="Phone", default="", max_length=255)
     is_active = models.BooleanField(
         db_column="IsActive",
         default=True,

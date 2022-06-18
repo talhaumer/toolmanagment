@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i7l9z20eio204f2s27^q5_u&2=6k*3iy1az!750%^j4drtmt9v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,6 +49,7 @@ PROJECT_APPS = [
     "api",
     "main",
     "user",
+    "tools"
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -149,7 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 HOST_URL = os.getenv("HOST_URL", "http://127.0.0.1:8000")
 
 
-AUTHORIZATION_SERVER_URL = f"{HOST_URL}/o/token/"
+AUTHORIZATION_SERVER_URL = f"{HOST_URL}/oauth/token/"
 
 REVOKE_TOKEN_URL = os.getenv("REVOKE_TOKEN_URLs", f"{HOST_URL}/oauth/revoke-token/")
 
@@ -170,7 +171,15 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     )
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "t.umer@gaper.io"
+EMAIL_HOST_PASSWORD = "gaper@130"

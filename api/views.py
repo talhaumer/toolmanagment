@@ -133,11 +133,13 @@ class BaseAPIView(APIView):
         try:
             url = settings.REVOKE_TOKEN_URL
             headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
             data = {
                 "token": token,
                 "client_secret": settings.OAUTH_CLIENT_SECRET,
                 "client_id": settings.OAUTH_CLIENT_ID,
             }
+
             response = requests.post(url=url, headers=headers, data=data)
             if response.ok:
                 return True
@@ -162,7 +164,6 @@ class BaseAPIView(APIView):
                 "backend": backend,
                 "token": token,
             }
-
             response = requests.post(url=url, data=data)
             json_response = response.json()
             if response.ok:
